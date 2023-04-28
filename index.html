@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0 auto;
+        padding: 0;
+      }
+      .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .inp {
+        height: 20px;
+        background-color: rgb(130, 233, 233);
+        border-radius: 5px;
+        border: 1px solid rgb(88, 130, 223);
+      }
+      .submit {
+        height: 20px;
+        background-color: rgb(230, 131, 131);
+        border-radius: 5px;
+      }
+      ol {
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="form" action="">
+      <div class="headBox">
+        <input class="inp" type="text" />
+        <button class="submit">ADD</button>
+        <button class="edtBtn">EDIT</button>
+      </div>
+    </form>
+    <div class="footBox"></div>
+    <script>
+      const inp = document.querySelector(".inp");
+      const submit = document.querySelector(".submit");
+      const form = document.querySelector(".form");
+      const headBox = document.querySelector(".headBox");
+      const footBox = document.querySelector(".footBox");
+
+      submit.addEventListener("click", function (e) {
+        if (inp.value === "") {
+          alert("hkljhvlkjx");
+        } else {
+          const olElement = document.createElement("ol");
+          olElement.className = "list";
+          olElement.innerHTML = inp.value;
+          olElement.style.cssText = "border:1px solid blue; width: 200px";
+          footBox.appendChild(olElement);
+          inp.value = "";
+          const editElement = document.createElement("button");
+          editElement.className = "editElement";
+          editElement.innerText = "Edit";
+          olElement.appendChild(editElement);
+          const deletElement = document.createElement("button");
+          deletElement.className = "deletElement";
+          deletElement.innerText = "Delete";
+          olElement.appendChild(deletElement);
+          deletElement.addEventListener("click", () => {
+            olElement.remove();
+          });
+          editElement.addEventListener("click", function () {});
+        }
+        e.preventDefault();
+      });
+    </script>
+  </body>
+</html>
