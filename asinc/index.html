@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button class="start">Start</button>
+    <button class="stop">Stop</button>
+    <div class="show"></div>
+    <script>
+      const start = document.querySelector(".start");
+      const stop = document.querySelector(".stop");
+      const show = document.querySelector(".show");
+      let counter;
+      let num = 0;
+      start.addEventListener("focus", function () {
+        if (start.innerText === "Start") {
+          counter = setInterval(() => {
+            num++;
+            show.innerText = num;
+          }, 100);
+        }
+        stop.addEventListener("focus", function () {
+          if (stop.innerText === "Stop") {
+            clearInterval(counter);
+          }
+        });
+      });
+      function clock(a) {
+        let second = a % 60;
+        let minure = parseInt((a - second) / 60);
+
+        if (minure < 10) {
+          minure = "0" + minure;
+        }
+        second < 10 ? (second = "0" + second) : null;
+        return `${minure}:${second}`;
+      }
+    </script>
+  </body>
+</html>
