@@ -17,10 +17,10 @@
     <table style="width: 100%">
       <thead>
         <tr>
-          <th>ÖLKƏNİN ADI</th>
-          <th>PAYTAXTI</th>
-          <th>ƏHALİ SAYI</th>
-          <th>MÖVQE</th>
+          <th>No</th>
+          <th>ADI</th>
+          <th>telefonu</th>
+          <th>seher</th>
         </tr>
         <tbody></tbody>
       </thead>
@@ -28,8 +28,9 @@
     <script>
       const table = document.querySelector("table");
       const tbody = document.querySelector("tbody");
-      let a = 0;
-      fetch("https://restcountries.com/v3.1/all")
+      let a = 1;
+      let yaddas;
+      fetch("https://northwind.vercel.app/api/products")
         .then((response) => response.json())
         .then(data => {
           data.forEach(elem => {
@@ -38,20 +39,35 @@
             const td2 = document.createElement("td");
             const td3 = document.createElement("td");
             const td4 = document.createElement("td");
-
             const btn = document.createElement("button");
-btn.innerText="x"
+            btn.innerText="Delete"
+            const btnEdit = document.createElement("button");
+            btnEdit.innerText="Edit"
 
-            tr.append(td1,td2,td3,td4,btn);
+
+            tr.append(td1,td2,td3,td4,btn,btnEdit);
             tbody.appendChild(tr);
-            td1.innerText=elem.name.common
-            td2.innerText=elem.capital
-            td3.innerText=elem.population
-            td4.innerText=elem.continents
+            td1.innerText=a++
+            td2.innerText=elem.name
+            console.log(elem.supplier)
+            if(elem.supplier){
+              td3.innerText=elem.supplier.address.phone
+              td4.innerText=elem.supplier.address.city
+            }
+            else{
+              td3.innerText = " "
+            }
+
 
         btn.addEventListener("click",()=>{
             tr.remove()
+
+            btnEdit.addEventListener("click",()=>{
+              const input=document.createElement("input")
+              tr.appendChild(input)
+            })
         })
+
             console.log(elem)
           });
         });
